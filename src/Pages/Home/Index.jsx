@@ -1,4 +1,5 @@
 import { QuizzConsumer } from "../../Contexts/Quizz";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { setAmt } = QuizzConsumer();
@@ -11,13 +12,19 @@ function Home() {
           Insira abaixo quantas perguntas deseja responder, para que possamos
           começar!
         </h2>
-        <input
-          type="number"
-          name="amt"
-          className="input__geral texto"
-          max={50}
-          onChange={(event) => setAmt(event.target.value)}
-        />
+        <div className="form__container">
+          <input
+            type="number"
+            name="amt"
+            className="input__geral texto"
+            max={50}
+            onChange={(event) => setAmt(event.target.value)}
+          />
+
+          <Link className="texto btn__geral" to="/quizz">
+            Começar!
+          </Link>
+        </div>
       </main>
     </>
   );

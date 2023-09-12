@@ -276,6 +276,6 @@ html {
 .input__geral {
   border-radius: 15px;
   border: 4px solid var(--cor-borda);
-  width: 50%;
+  width: 5%;
   margin: 0.5em;
 }
