@@ -1,0 +1,10 @@
+.card__quizz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cor-card);
+  margin: 0 2.5em;
+  padding: 2em;
+  border-radius: 15px;
+}

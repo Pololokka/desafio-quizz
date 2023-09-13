@@ -9,7 +9,6 @@ const QuizzProvider = ({ children }) => {
 
   useEffect(() => {
     getQuestion(amt, setQuestion);
-    console.log(question);
   }, [amt]);
 
   return (
