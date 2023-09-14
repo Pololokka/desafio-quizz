@@ -13,3 +13,17 @@ export const getQuestion = async (amt, setState) => {
     console.log(`Erro: ${error}`);
   }
 };
+
+export const randomizeAnswers = (arr, current, setState) => {
+  let correctAnswer = arr[current].correct_answer;
+  let wrongAnswer = arr[current].incorrect_answers;
+  let optionsList = wrongAnswer;
+
+  optionsList.splice(
+    Math.floor(Math.random() * (wrongAnswer.length + 1)),
+    0,
+    correctAnswer
+  );
+
+  setState(optionsList);
+};

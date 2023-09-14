@@ -3,30 +3,21 @@ import "./Style.css";
 import { useEffect, useState } from "react";
 import { QuizzConsumer } from "../../Contexts/Quizz";
 
+import { randomizeAnswers } from "../../Func/Questions";
+
 function Quizz() {
   const [answers, setAnswers] = useState("");
   const { question, amt } = QuizzConsumer();
   const [questionNumber, setQuestionNumber] = useState(0);
   const [possibleAnswers, setPossibleAnswers] = useState([]);
 
-  console.log(question);
-
   useEffect(() => {
-    randomizeAnswers(question, questionNumber);
+    randomizeAnswers(question, questionNumber, setPossibleAnswers);
   }, [questionNumber]);
 
-  const randomizeAnswers = (arr, current) => {
-    let correctAnswer = arr[current].correct_answer;
-    let wrongAnswer = arr[current].incorrect_answers;
-    let optionsList = wrongAnswer;
-
-    optionsList.splice(
-      Math.floor(Math.random() * (wrongAnswer.length + 1)),
-      0,
-      correctAnswer
-    );
-
-    setPossibleAnswers(optionsList);
+  const handleChangeRadio = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.name);
   };
 
   return (
@@ -41,13 +32,27 @@ function Quizz() {
           <p className="texto">{question[questionNumber].category}</p>
           <p className="subtitulo texto-hover">Pergunta:</p>
           <p className="texto">{question[questionNumber].question}</p>
-          {possibleAnswers.map((element, index) => {
-            return (
-              <p key={index} className="texto">
-                {element}
-              </p>
-            );
-          })}
+          <p className="subtitulo texto-hover">Respostas:</p>
+          <ul
+            className="form__container"
+            onChange={(event) => handleChangeRadio(event)}
+          >
+            {possibleAnswers.map((element, index) => {
+              return (
+                <li key={index} className="btn__geral2 texto">
+                  <input
+                    type="radio"
+                    name={questionNumber}
+                    id={element}
+                    value={element}
+                  />
+                  <label htmlFor={element} className="texto">
+                    {element}
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
           <input
             type="button"
             value="Próxima Pergunta!"
