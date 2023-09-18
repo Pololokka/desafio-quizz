@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { QuizzConsumer } from "../../Contexts/Quizz";
 
 import { randomizeAnswers } from "../../Func/Questions";
+import { saveAnswers } from "../../Func/Questions";
 
 function Quizz() {
   const [answers, setAnswers] = useState([]);
@@ -15,14 +16,14 @@ function Quizz() {
     randomizeAnswers(question, questionNumber, setPossibleAnswers);
   }, [questionNumber]);
 
-  const saveAnswers = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  // const saveAnswers = (event) => {
+  //   const name = event.target.name;
+  //   const value = event.target.value;
 
-    setAnswers({ ...answers, [name]: value });
+  //   setAnswers({ ...answers, [name]: value });
 
-    console.log(answers);
-  };
+  //   console.log(answers);
+  // };
 
   return (
     <>
@@ -39,7 +40,7 @@ function Quizz() {
           <p className="subtitulo texto-hover">Respostas:</p>
           <ul
             className="form__container"
-            onChange={(event) => saveAnswers(event)}
+            onChange={(event) => saveAnswers(event, answers, setAnswers)}
           >
             {possibleAnswers.map((element, index) => {
               return (
@@ -61,7 +62,13 @@ function Quizz() {
             type="button"
             value="Próxima Pergunta!"
             className="btn__geral texto"
-            onClick={() => setQuestionNumber(questionNumber + 1)}
+            onClick={() => {
+              if (questionNumber + 1 < amt) {
+                setQuestionNumber(questionNumber + 1);
+              } else {
+                console.log("acabou as perguntas");
+              }
+            }}
           />
         </section>
       </main>
