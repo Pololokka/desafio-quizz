@@ -6,7 +6,7 @@ import { QuizzConsumer } from "../../Contexts/Quizz";
 import { randomizeAnswers } from "../../Func/Questions";
 
 function Quizz() {
-  const [answers, setAnswers] = useState("");
+  const [answers, setAnswers] = useState([]);
   const { question, amt } = QuizzConsumer();
   const [questionNumber, setQuestionNumber] = useState(0);
   const [possibleAnswers, setPossibleAnswers] = useState([]);
@@ -15,9 +15,13 @@ function Quizz() {
     randomizeAnswers(question, questionNumber, setPossibleAnswers);
   }, [questionNumber]);
 
-  const handleChangeRadio = (event) => {
-    console.log(event.target.value);
-    console.log(event.target.name);
+  const saveAnswers = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setAnswers({ ...answers, [name]: value });
+
+    console.log(answers);
   };
 
   return (
@@ -35,7 +39,7 @@ function Quizz() {
           <p className="subtitulo texto-hover">Respostas:</p>
           <ul
             className="form__container"
-            onChange={(event) => handleChangeRadio(event)}
+            onChange={(event) => saveAnswers(event)}
           >
             {possibleAnswers.map((element, index) => {
               return (
