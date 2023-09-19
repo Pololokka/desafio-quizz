@@ -8,7 +8,10 @@ import { saveAnswers } from "../../Func/Questions";
 
 function Quizz() {
   const [answers, setAnswers] = useState([]);
+  const [answered, setAnswered] = useState(false);
+
   const { question, amt } = QuizzConsumer();
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [possibleAnswers, setPossibleAnswers] = useState([]);
 
@@ -16,14 +19,12 @@ function Quizz() {
     randomizeAnswers(question, questionNumber, setPossibleAnswers);
   }, [questionNumber]);
 
-  // const saveAnswers = (event) => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
+  const handleShowAnswer = () => {
+    console.log(question[questionNumber].correct_answer);
+    console.log(answers);
+  };
 
-  //   setAnswers({ ...answers, [name]: value });
-
-  //   console.log(answers);
-  // };
+  console.log(answered);
 
   return (
     <>
@@ -40,7 +41,9 @@ function Quizz() {
           <p className="subtitulo texto-hover">Respostas:</p>
           <ul
             className="form__container"
-            onChange={(event) => saveAnswers(event, answers, setAnswers)}
+            onChange={(event) =>
+              saveAnswers(event, answers, setAnswers, answered, setAnswered)
+            }
           >
             {possibleAnswers.map((element, index) => {
               return (
@@ -58,6 +61,14 @@ function Quizz() {
               );
             })}
           </ul>
+          <input
+            type="button"
+            value="Mostrar resposta!"
+            className="btn__geral texto"
+            disabled={answered == true ? false : true}
+            onClick={handleShowAnswer}
+          />
+
           <input
             type="button"
             value="Próxima Pergunta!"

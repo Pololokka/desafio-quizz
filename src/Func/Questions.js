@@ -28,11 +28,12 @@ export const randomizeAnswers = (arr, current, setState) => {
   setState(optionsList);
 };
 
-export const saveAnswers = (event, state, setState) => {
-  const name = event.target.name;
-  const value = event.target.value;
+export const saveAnswers = (event, state, setState, answered, setAnswered) => {
+  if (!answered) {
+    const name = event.target.name;
+    const value = event.target.value;
 
-  setState({ ...state, [name]: value });
-
-  console.log(state);
+    setState({ ...state, [name]: value });
+    setAnswered(true);
+  }
 };
