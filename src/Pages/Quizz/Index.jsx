@@ -24,6 +24,19 @@ function Quizz() {
     console.log(answers);
   };
 
+  const handleNext = () => {
+    if (answered) {
+      if (questionNumber + 1 < amt) {
+        setQuestionNumber(questionNumber + 1);
+        setAnswered(false);
+      } else {
+        console.log("acabou as perguntas");
+      }
+    } else {
+      console.log("responde essa porra");
+    }
+  };
+
   console.log(answered);
 
   return (
@@ -64,22 +77,16 @@ function Quizz() {
           <input
             type="button"
             value="Mostrar resposta!"
-            className="btn__geral texto"
-            disabled={answered == true ? false : true}
+            className={answered ? "btn__geral texto" : "btn__inactive texto"}
+            disabled={answered ? false : true}
             onClick={handleShowAnswer}
           />
 
           <input
             type="button"
             value="Próxima Pergunta!"
-            className="btn__geral texto"
-            onClick={() => {
-              if (questionNumber + 1 < amt) {
-                setQuestionNumber(questionNumber + 1);
-              } else {
-                console.log("acabou as perguntas");
-              }
-            }}
+            className={answered ? "btn__geral texto" : "btn__inactive texto"}
+            onClick={handleNext}
           />
         </section>
       </main>
