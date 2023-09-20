@@ -8,7 +8,8 @@ import { saveAnswers } from "../../Func/Questions";
 
 function Quizz() {
   const [answers, setAnswers] = useState([]);
-  const [answered, setAnswered] = useState(false);
+  const [chosen, setChosen] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const { question, amt } = QuizzConsumer();
 
@@ -20,15 +21,19 @@ function Quizz() {
   }, [questionNumber]);
 
   const handleShowAnswer = () => {
-    console.log(question[questionNumber].correct_answer);
-    console.log(answers);
+    if (chosen && !showAnswer) {
+      console.log(question[questionNumber].correct_answer);
+      console.log(answers);
+      setShowAnswer(true);
+    }
   };
 
   const handleNext = () => {
-    if (answered) {
+    if (chosen) {
       if (questionNumber + 1 < amt) {
         setQuestionNumber(questionNumber + 1);
-        setAnswered(false);
+        setChosen(false);
+        setShowAnswer(false);
       } else {
         console.log("acabou as perguntas");
       }
@@ -37,7 +42,7 @@ function Quizz() {
     }
   };
 
-  console.log(answered);
+  console.log(chosen);
 
   return (
     <>
@@ -55,7 +60,7 @@ function Quizz() {
           <ul
             className="form__container"
             onChange={(event) =>
-              saveAnswers(event, answers, setAnswers, answered, setAnswered)
+              saveAnswers(event, answers, setAnswers, showAnswer, setChosen)
             }
           >
             {possibleAnswers.map((element, index) => {
@@ -77,15 +82,24 @@ function Quizz() {
           <input
             type="button"
             value="Mostrar resposta!"
-            className={answered ? "btn__geral texto" : "btn__inactive texto"}
-            disabled={answered ? false : true}
+            className={chosen ? "btn__geral texto" : "btn__inactive texto"}
+            disabled={chosen ? false : true}
             onClick={handleShowAnswer}
           />
+
+          <p className="texto texto-hover">
+            Sua resposta é: {answers[questionNumber]}
+          </p>
+          {showAnswer && (
+            <p className="texto texto-hover">
+              Resposta correta: {question[questionNumber].correct_answer}
+            </p>
+          )}
 
           <input
             type="button"
             value="Próxima Pergunta!"
-            className={answered ? "btn__geral texto" : "btn__inactive texto"}
+            className={chosen ? "btn__geral texto" : "btn__inactive texto"}
             onClick={handleNext}
           />
         </section>
