@@ -2,16 +2,16 @@ import "./Style.css";
 
 import { useEffect, useState } from "react";
 import { QuizzConsumer } from "../../Contexts/Quizz";
+import { Link } from "react-router-dom";
 
 import { randomizeAnswers } from "../../Func/Questions";
 import { saveAnswers } from "../../Func/Questions";
 
 function Quizz() {
-  const [answers, setAnswers] = useState([]);
+  const { question, amt, answers, setAnswers } = QuizzConsumer();
+
   const [chosen, setChosen] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-
-  const { question, amt } = QuizzConsumer();
 
   const [questionNumber, setQuestionNumber] = useState(0);
   const [possibleAnswers, setPossibleAnswers] = useState([]);
@@ -37,8 +37,6 @@ function Quizz() {
       } else {
         console.log("acabou as perguntas");
       }
-    } else {
-      console.log("responde essa porra");
     }
   };
 
@@ -96,12 +94,21 @@ function Quizz() {
             </p>
           )}
 
-          <input
-            type="button"
-            value="Próxima Pergunta!"
-            className={chosen ? "btn__geral texto" : "btn__inactive texto"}
-            onClick={handleNext}
-          />
+          {questionNumber + 1 < amt ? (
+            <input
+              type="button"
+              value="Próxima Pergunta!"
+              className={chosen ? "btn__geral texto" : "btn__inactive texto"}
+              onClick={handleNext}
+            />
+          ) : (
+            <Link
+              className={chosen ? "btn__geral texto" : "btn__inactive texto"}
+              to="/"
+            >
+              Finalizar
+            </Link>
+          )}
         </section>
       </main>
     </>

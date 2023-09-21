@@ -6,6 +6,7 @@ const QuizzContext = createContext();
 const QuizzProvider = ({ children }) => {
   const [amt, setAmt] = useState();
   const [question, setQuestion] = useState();
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     getQuestion(amt, setQuestion);
@@ -18,6 +19,8 @@ const QuizzProvider = ({ children }) => {
         setAmt,
         question,
         setQuestion,
+        answers,
+        setAnswers,
       }}
     >
       {children}
