@@ -104,7 +104,7 @@ function Quizz() {
           ) : (
             <Link
               className={chosen ? "btn__geral texto" : "btn__inactive texto"}
-              to="/"
+              to="/resultados"
             >
               Finalizar
             </Link>

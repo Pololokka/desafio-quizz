@@ -9,6 +9,7 @@ import Home from "./Pages/Home/Index.jsx";
 
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import Quizz from "./Pages/Quizz/Index.jsx";
+import Results from "./Pages/Results/Index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/quizz",
         element: <Quizz />,
+      },
+      {
+        path: "/resultados",
+        element: <Results />,
       },
     ],
   },
