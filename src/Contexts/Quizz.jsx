@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { getQuestion } from "../Func/Questions";
+import React, { createContext, useContext, useState } from "react";
 
 const QuizzContext = createContext();
 
@@ -7,10 +6,6 @@ const QuizzProvider = ({ children }) => {
   const [amt, setAmt] = useState();
   const [question, setQuestion] = useState();
   const [answers, setAnswers] = useState([]);
-
-  useEffect(() => {
-    getQuestion(amt, setQuestion);
-  }, [amt]);
 
   return (
     <QuizzContext.Provider

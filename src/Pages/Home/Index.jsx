@@ -1,8 +1,14 @@
 import { QuizzConsumer } from "../../Contexts/Quizz";
+import { useEffect } from "react";
+import { getQuestion } from "../../Func/Questions";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const { setAmt } = QuizzConsumer();
+  const { amt, setAmt, setQuestion } = QuizzConsumer();
+
+  useEffect(() => {
+    getQuestion(amt, setQuestion);
+  }, [amt]);
 
   return (
     <>
