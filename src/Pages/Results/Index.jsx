@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { QuizzConsumer } from "../../Contexts/Quizz";
 
 function Results() {
@@ -6,7 +6,19 @@ function Results() {
 
   const { question, answers } = QuizzConsumer();
 
-  console.log(question);
+  useEffect(() => {
+    contCorrect();
+  }, []);
+
+  const contCorrect = () => {
+    question.forEach((element, index) => {
+      if (answers[index] == element.correct_answer) {
+        setCont(cont + 1);
+        console.log("teste do if");
+      }
+      console.log("teste fora do if");
+    });
+  };
 
   return (
     <>
@@ -14,9 +26,9 @@ function Results() {
         Parabéns, você concluiu mais um quizz!
       </p>
       <p className="subtitulo subtitulo-hover">Veja abaixo como você se saiu</p>
+      <p className="texto">Acertos: {cont}</p>
 
       {question.map((element, index) => {
-        console.log(element);
         return (
           <div>
             <p className="subtitulo texto-hover">Questão {index + 1}</p>
