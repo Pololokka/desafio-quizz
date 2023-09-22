@@ -22,8 +22,6 @@ function Quizz() {
 
   const handleShowAnswer = () => {
     if (chosen && !showAnswer) {
-      console.log(question[questionNumber].correct_answer);
-      console.log(answers);
       setShowAnswer(true);
     }
   };

@@ -4,29 +4,6 @@ import { QuizzConsumer } from "../../Contexts/Quizz";
 function Results() {
   const { question, answers, cont } = QuizzConsumer();
 
-  // useEffect(() => {
-  //   contCorrect();
-  // }, []);
-
-  // const contCorrect = () => {
-  //   // question.forEach((element, index) => {
-  //   //   if (answers[index] == element.correct_answer) {
-  //   //     setCont(cont + 1);
-  //   //     console.log("teste do if");
-  //   //   }
-  //   //   console.log("teste fora do if");
-  //   // });
-
-  //   question.diff = function (answers) {
-  //     var ret = [];
-  //     for (var i in this) {
-  //       if (answers.indexOf(this[i]) > -1) {
-  //         setCont(cont + 1);
-  //       }
-  //     }
-  //   };
-  // };
-
   return (
     <>
       <p className="titulo titulo-hover">
