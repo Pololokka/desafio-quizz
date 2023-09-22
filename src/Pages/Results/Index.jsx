@@ -2,23 +2,30 @@ import { useState, useEffect } from "react";
 import { QuizzConsumer } from "../../Contexts/Quizz";
 
 function Results() {
-  const [cont, setCont] = useState(0);
+  const { question, answers, cont } = QuizzConsumer();
 
-  const { question, answers } = QuizzConsumer();
+  // useEffect(() => {
+  //   contCorrect();
+  // }, []);
 
-  useEffect(() => {
-    contCorrect();
-  }, []);
+  // const contCorrect = () => {
+  //   // question.forEach((element, index) => {
+  //   //   if (answers[index] == element.correct_answer) {
+  //   //     setCont(cont + 1);
+  //   //     console.log("teste do if");
+  //   //   }
+  //   //   console.log("teste fora do if");
+  //   // });
 
-  const contCorrect = () => {
-    question.forEach((element, index) => {
-      if (answers[index] == element.correct_answer) {
-        setCont(cont + 1);
-        console.log("teste do if");
-      }
-      console.log("teste fora do if");
-    });
-  };
+  //   question.diff = function (answers) {
+  //     var ret = [];
+  //     for (var i in this) {
+  //       if (answers.indexOf(this[i]) > -1) {
+  //         setCont(cont + 1);
+  //       }
+  //     }
+  //   };
+  // };
 
   return (
     <>

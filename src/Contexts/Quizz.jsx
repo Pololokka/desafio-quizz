@@ -6,6 +6,7 @@ const QuizzProvider = ({ children }) => {
   const [amt, setAmt] = useState();
   const [question, setQuestion] = useState();
   const [answers, setAnswers] = useState([]);
+  const [cont, setCont] = useState(0);
 
   return (
     <QuizzContext.Provider
@@ -16,6 +17,8 @@ const QuizzProvider = ({ children }) => {
         setQuestion,
         answers,
         setAnswers,
+        cont,
+        setCont,
       }}
     >
       {children}

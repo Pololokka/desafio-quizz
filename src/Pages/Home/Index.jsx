@@ -4,10 +4,11 @@ import { getQuestion } from "../../Func/Questions";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const { amt, setAmt, setQuestion } = QuizzConsumer();
+  const { amt, setAmt, setQuestion, setCont } = QuizzConsumer();
 
   useEffect(() => {
     getQuestion(amt, setQuestion);
+    setCont(0);
   }, [amt]);
 
   return (

@@ -8,7 +8,7 @@ import { randomizeAnswers } from "../../Func/Questions";
 import { saveAnswers } from "../../Func/Questions";
 
 function Quizz() {
-  const { question, amt, answers, setAnswers } = QuizzConsumer();
+  const { question, amt, answers, setAnswers, cont, setCont } = QuizzConsumer();
 
   const [chosen, setChosen] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -28,12 +28,19 @@ function Quizz() {
     }
   };
 
+  const compareAnswer = () => {
+    if (answers[questionNumber] == question[questionNumber].correct_answer) {
+      setCont(cont + 1);
+    }
+  };
+
   const handleNext = () => {
     if (chosen) {
       if (questionNumber + 1 < amt) {
         setQuestionNumber(questionNumber + 1);
         setChosen(false);
         setShowAnswer(false);
+        compareAnswer();
       } else {
         console.log("acabou as perguntas");
       }
@@ -105,6 +112,7 @@ function Quizz() {
             <Link
               className={chosen ? "btn__geral texto" : "btn__inactive texto"}
               to="/resultados"
+              onClick={compareAnswer}
             >
               Finalizar
             </Link>
