@@ -39,13 +39,9 @@ function Quizz() {
         setChosen(false);
         setShowAnswer(false);
         compareAnswer();
-      } else {
-        console.log("acabou as perguntas");
       }
     }
   };
-
-  console.log(chosen);
 
   return (
     <>
