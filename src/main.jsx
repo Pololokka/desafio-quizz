@@ -32,9 +32,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <QuizzProvider>
-      <RouterProvider router={router} />
-    </QuizzProvider>
-  </React.StrictMode>
+  <QuizzProvider>
+    <RouterProvider router={router} />
+  </QuizzProvider>
 );

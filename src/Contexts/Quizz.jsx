@@ -6,7 +6,12 @@ const QuizzProvider = ({ children }) => {
   const [amt, setAmt] = useState();
   const [question, setQuestion] = useState();
   const [answers, setAnswers] = useState([]);
+  const [previousAnswers, setPreviousAnswers] = useState([]);
   const [cont, setCont] = useState(0);
+
+  const saveQuizzAnswer = () => {
+    console.log("teste");
+  };
 
   return (
     <QuizzContext.Provider
@@ -19,6 +24,8 @@ const QuizzProvider = ({ children }) => {
         setAnswers,
         cont,
         setCont,
+        previousAnswers,
+        setPreviousAnswers,
       }}
     >
       {children}
