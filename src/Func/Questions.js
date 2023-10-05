@@ -37,3 +37,20 @@ export const saveAnswers = (event, state, setState, showAnswer, setChosen) => {
     setChosen(true);
   }
 };
+
+export const setQuizzAnswer = (
+  question,
+  cont,
+  previousAnswers,
+  setPreviousAnswers
+) => {
+  const score = {
+    total: question.length,
+    correct: cont,
+  };
+
+  let arrayAnswers = previousAnswers;
+  arrayAnswers.push(score);
+
+  setPreviousAnswers(arrayAnswers);
+};

@@ -2,26 +2,23 @@ import "./Styles.css";
 
 import { QuizzConsumer } from "../../Contexts/Quizz";
 import { useEffect } from "react";
+import { setQuizzAnswer } from "../../Func/Questions";
 
 function Results() {
-  const { question, answers, cont, previousAnswers, setPreviousAnswers } =
-    QuizzConsumer();
+  const {
+    question,
+    answers,
+    cont,
+    previousAnswers,
+    setPreviousAnswers,
+    saveQuizzAnswer,
+  } = QuizzConsumer();
 
   useEffect(() => {
-    setQuizzAnswer();
+    setQuizzAnswer(question, cont, previousAnswers, setPreviousAnswers);
+    console.log(previousAnswers);
+    saveQuizzAnswer();
   }, []);
-
-  const setQuizzAnswer = () => {
-    const score = {
-      total: question.length,
-      correct: cont,
-    };
-
-    let arrayAnswers = previousAnswers;
-    arrayAnswers.push(score);
-
-    setPreviousAnswers(arrayAnswers);
-  };
 
   return (
     <>

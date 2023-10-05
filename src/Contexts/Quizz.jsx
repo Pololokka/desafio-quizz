@@ -6,11 +6,14 @@ const QuizzProvider = ({ children }) => {
   const [amt, setAmt] = useState();
   const [question, setQuestion] = useState();
   const [answers, setAnswers] = useState([]);
-  const [previousAnswers, setPreviousAnswers] = useState([]);
+  const [previousAnswers, setPreviousAnswers] = useState(
+    JSON.parse(localStorage.getItem("previousAnswers")) || []
+  );
   const [cont, setCont] = useState(0);
 
   const saveQuizzAnswer = () => {
-    console.log("teste");
+    const previousAnswersJSON = JSON.stringify(previousAnswers);
+    localStorage.setItem("previousAnswers", previousAnswersJSON);
   };
 
   return (
@@ -26,6 +29,7 @@ const QuizzProvider = ({ children }) => {
         setCont,
         previousAnswers,
         setPreviousAnswers,
+        saveQuizzAnswer,
       }}
     >
       {children}
