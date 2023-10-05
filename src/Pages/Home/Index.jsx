@@ -4,12 +4,14 @@ import { getQuestion } from "../../Func/Questions";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const { amt, setAmt, setQuestion, setAnswers, setCont } = QuizzConsumer();
+  const { amt, setAmt, setQuestion, setAnswers, setCont, previousAnswers } =
+    QuizzConsumer();
 
   useEffect(() => {
     getQuestion(amt, setQuestion);
     setCont(0);
     setAnswers([]);
+    console.log(previousAnswers);
   }, [amt]);
 
   return (
