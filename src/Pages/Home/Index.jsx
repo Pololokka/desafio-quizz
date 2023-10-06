@@ -1,11 +1,20 @@
+import "./Styles.css";
+
 import { QuizzConsumer } from "../../Contexts/Quizz";
 import { useEffect } from "react";
 import { getQuestion } from "../../Func/Questions";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const { amt, setAmt, setQuestion, setAnswers, setCont, previousAnswers } =
-    QuizzConsumer();
+  const {
+    amt,
+    setAmt,
+    setQuestion,
+    setAnswers,
+    setCont,
+    previousAnswers,
+    handleDeleteHistory,
+  } = QuizzConsumer();
 
   useEffect(() => {
     getQuestion(amt, setQuestion);
@@ -22,7 +31,7 @@ function Home() {
           Insira abaixo quantas perguntas deseja responder, para que possamos
           começar!
         </h2>
-        <div className="form__container">
+        <section className="form__container">
           <input
             type="number"
             name="amt"
@@ -34,7 +43,28 @@ function Home() {
           <Link className="texto btn__geral" to="/quizz">
             Começar!
           </Link>
-        </div>
+        </section>
+
+        <section>
+          <input
+            type="button"
+            value="Apagar Histórico"
+            className="texto btn__geral"
+            onClick={handleDeleteHistory}
+          />
+
+          <div className="tries__grid">
+            {previousAnswers.map((element, index) => {
+              return (
+                <div className="tries__card">
+                  <p className="subtitulo subtitulo-hover">Tentativa {index}</p>
+                  <p className="texto">Perguntas: {element.total}</p>
+                  <p className="texto">Acertos: {element.correct}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
       </main>
     </>
   );

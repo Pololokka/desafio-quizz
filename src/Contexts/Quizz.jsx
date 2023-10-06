@@ -16,6 +16,11 @@ const QuizzProvider = ({ children }) => {
     localStorage.setItem("previousAnswers", previousAnswersJSON);
   };
 
+  const handleDeleteHistory = () => {
+    localStorage.clear();
+    setPreviousAnswers([]);
+  };
+
   return (
     <QuizzContext.Provider
       value={{
@@ -30,6 +35,7 @@ const QuizzProvider = ({ children }) => {
         previousAnswers,
         setPreviousAnswers,
         saveQuizzAnswer,
+        handleDeleteHistory,
       }}
     >
       {children}
